@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "zMMYlgopvnFm2hB9nSnLpmPXGK7efVsS5j3tEzLyZ8E=",
+  "Source": "KartApiGateway.Api",
+  "BasePath": "_content/KartApiGateway.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
