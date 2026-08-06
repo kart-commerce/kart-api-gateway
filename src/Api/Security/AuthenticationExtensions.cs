@@ -10,11 +10,17 @@ namespace KartApiGateway.Api.Security;
 /// original token is forwarded unchanged (YARP forwards the Authorization header by default;
 /// no internal header is minted here). The "authenticated" policy is the coarse gate this
 /// release's route table needs (design-decisions.md "Adding a Future Service's Route"); a
-/// coarser role-gated policy (e.g. "AdminOnly") is a later addition, not built speculatively.
+/// "AdminOnly" gates the `/v1/admin/*` route added for kart-admin-service, on the same claim
+/// shape kart-category-service's own AuthenticationExtensions already uses:
+/// `new Claim("roles", role)` per kart-identity-service's JwtAccessTokenGenerator, value
+/// "admin" for the Admin-scoped service principal Admin Service authenticates as (ADR-0010).
 /// </summary>
 public static class AuthenticationExtensions
 {
     public const string AuthenticatedPolicy = "authenticated";
+    public const string AdminOnlyPolicy = "AdminOnly";
+    private const string RolesClaimType = "roles";
+    private const string AdminRoleValue = "admin";
 
     public static IServiceCollection AddGatewayAuthentication(this IServiceCollection services)
     {
@@ -41,7 +47,8 @@ public static class AuthenticationExtensions
             });
 
         services.AddAuthorizationBuilder()
-            .AddPolicy(AuthenticatedPolicy, policy => policy.RequireAuthenticatedUser());
+            .AddPolicy(AuthenticatedPolicy, policy => policy.RequireAuthenticatedUser())
+            .AddPolicy(AdminOnlyPolicy, policy => policy.RequireClaim(RolesClaimType, AdminRoleValue));
 
         return services;
     }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "04dx37Bxr94Vlmeh5jLOU/KkibNrr4JFtlKG51UPDpvQhFZ3ab/jqLMbQIKCDd4R7dw+P8DODanr1J/iuzlopA==",
+  "dgSpecHash": "owW9OJGu4Ik=",
   "success": true,
   "projectFilePath": "/home/kakon/Developer/Personal/kart-commerce/kart-api-gateway/src/Api/KartApiGateway.Api.csproj",
   "expectedPackageFiles": [
@@ -57,7 +57,10 @@
     "/home/kakon/.nuget/packages/system.io.pipelines/10.0.0/system.io.pipelines.10.0.0.nupkg.sha512",
     "/home/kakon/.nuget/packages/system.text.encodings.web/10.0.0/system.text.encodings.web.10.0.0.nupkg.sha512",
     "/home/kakon/.nuget/packages/system.text.json/10.0.0/system.text.json.10.0.0.nupkg.sha512",
-    "/home/kakon/.nuget/packages/yarp.reverseproxy/2.2.0/yarp.reverseproxy.2.2.0.nupkg.sha512"
+    "/home/kakon/.nuget/packages/yarp.reverseproxy/2.2.0/yarp.reverseproxy.2.2.0.nupkg.sha512",
+    "/home/kakon/.nuget/packages/microsoft.netcore.app.ref/8.0.29/microsoft.netcore.app.ref.8.0.29.nupkg.sha512",
+    "/home/kakon/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.29/microsoft.aspnetcore.app.ref.8.0.29.nupkg.sha512",
+    "/home/kakon/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.29/microsoft.netcore.app.host.linux-x64.8.0.29.nupkg.sha512"
   ],
   "logs": []
 }

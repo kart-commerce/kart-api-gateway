@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KartApiGateway.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38a80e57e3ac639eff5c90b1e426506bed984e15")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+44363a5442fa1c575765f47e7d85a4979e0848dd")]
 [assembly: System.Reflection.AssemblyProductAttribute("KartApiGateway.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KartApiGateway.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

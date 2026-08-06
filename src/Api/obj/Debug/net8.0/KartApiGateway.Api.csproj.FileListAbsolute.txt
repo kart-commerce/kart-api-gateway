@@ -76,3 +76,4 @@
 /home/kakon/Developer/Personal/kart-commerce/kart-api-gateway/src/Api/obj/Debug/net8.0/KartApiGateway.Api.pdb
 /home/kakon/Developer/Personal/kart-commerce/kart-api-gateway/src/Api/obj/Debug/net8.0/KartApiGateway.Api.genruntimeconfig.cache
 /home/kakon/Developer/Personal/kart-commerce/kart-api-gateway/src/Api/obj/Debug/net8.0/ref/KartApiGateway.Api.dll
+/home/kakon/Developer/Personal/kart-commerce/kart-api-gateway/src/Api/bin/Debug/net8.0/appsettings.Development.json
