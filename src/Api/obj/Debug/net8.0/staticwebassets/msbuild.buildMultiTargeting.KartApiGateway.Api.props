@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/KartApiGateway.Api.props" />
-</Project>
