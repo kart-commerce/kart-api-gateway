@@ -61,24 +61,35 @@ public static class AuthenticationExtensions
         options.MapInboundClaims = false;
         
 
-        // Optional: Add events for debugging
+        // Structured, through the same Serilog/OTel pipeline every other log line in this
+        // service goes through (kart-conventions.md: "never string-concatenated messages") -
+        // these three events previously bypassed it entirely via Console.WriteLine, which meant
+        // an auth failure/challenge at the platform's single edge/entry point never reached Loki
+        // or carried a TraceId at all.
         options.Events = new JwtBearerEvents
         {
             OnAuthenticationFailed = context =>
             {
-                Console.WriteLine($"Authentication failed: {context.Exception.Message}");
+                var logger = context.HttpContext.RequestServices
+                    .GetRequiredService<ILoggerFactory>()
+                    .CreateLogger("KartApiGateway.Api.Security.Authentication");
+                logger.LogWarning(context.Exception, "Stage {Stage}: JWT authentication failed on {Path}", "AuthenticationFailed", context.Request.Path);
                 return Task.CompletedTask;
             },
             OnTokenValidated = context =>
             {
-                // <--For debugging what is getting inside the claims in Authorize attribute 
-                Console.WriteLine("Token validated successfully");
-                var claims = context?.Principal?.Claims.ToList();
+                var logger = context.HttpContext.RequestServices
+                    .GetRequiredService<ILoggerFactory>()
+                    .CreateLogger("KartApiGateway.Api.Security.Authentication");
+                logger.LogDebug("Stage {Stage}: JWT validated for subject {Subject} on {Path}", "AuthenticationSucceeded", context.Principal?.FindFirst("sub")?.Value, context.Request.Path);
                 return Task.CompletedTask;
             },
             OnChallenge = context =>
             {
-                Console.WriteLine($"OnChallenge: {context.Error}, {context.ErrorDescription}");
+                var logger = context.HttpContext.RequestServices
+                    .GetRequiredService<ILoggerFactory>()
+                    .CreateLogger("KartApiGateway.Api.Security.Authentication");
+                logger.LogWarning("Stage {Stage}: JWT challenge on {Path} - {Error} {ErrorDescription}", "AuthenticationChallenged", context.Request.Path, context.Error, context.ErrorDescription);
                 return Task.CompletedTask;
             }
         };

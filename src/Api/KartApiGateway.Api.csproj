@@ -17,7 +17,7 @@
     OpenTelemetry SDK behind one DI call - never reimplemented per service.
   -->
   <ItemGroup>
-    <PackageReference Include="Kart.Shared.Observability" Version="0.2.0" />
+    <PackageReference Include="Kart.Shared.Observability" Version="0.3.0" />
   </ItemGroup>
 
 </Project>
