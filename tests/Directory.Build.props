@@ -1,0 +1,10 @@
+<Project>
+  <Import Project="../Directory.Build.props" />
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <!-- Test doubles/fixtures legitimately hit patterns (nullable warnings on mocked members,
+         intentionally-unused parameters) that aren't worth elevating to build-breaking here
+         (same relaxation kart-admin-service/tests/Directory.Build.props already applies). -->
+    <WarningsAsErrors></WarningsAsErrors>
+  </PropertyGroup>
+</Project>
