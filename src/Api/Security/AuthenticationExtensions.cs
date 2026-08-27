@@ -14,13 +14,20 @@ namespace KartApiGateway.Api.Security;
 /// shape kart-category-service's own AuthenticationExtensions already uses:
 /// `new Claim("roles", role)` per kart-identity-service's JwtAccessTokenGenerator, value
 /// "admin" for the Admin-scoped service principal Admin Service authenticates as (ADR-0010).
+/// "AdminOrSupportAgent" gates the `/v1/ai-assistant/*` route added for
+/// kart-ai-assistant-service (ADR-0025's Gateway coarse check: "JWT carries `Admin` or
+/// `Support Agent` role claim") - same `roles` claim shape, role value "support_agent" per
+/// kart-identity-service's `PlatformRole` enum / database-design.md CHECK constraint
+/// (`role IN ('customer', 'support_agent', 'admin')`).
 /// </summary>
 public static class AuthenticationExtensions
 {
     public const string AuthenticatedPolicy = "authenticated";
     public const string AdminOnlyPolicy = "AdminOnly";
+    public const string AdminOrSupportAgentPolicy = "AdminOrSupportAgent";
     private const string RolesClaimType = "roles";
     private const string AdminRoleValue = "admin";
+    private const string SupportAgentRoleValue = "support_agent";
 
     public static IServiceCollection AddGatewayAuthentication(this IServiceCollection services)
     {
@@ -48,7 +55,8 @@ public static class AuthenticationExtensions
 
         services.AddAuthorizationBuilder()
             .AddPolicy(AuthenticatedPolicy, policy => policy.RequireAuthenticatedUser())
-            .AddPolicy(AdminOnlyPolicy, policy => policy.RequireClaim(RolesClaimType, AdminRoleValue));
+            .AddPolicy(AdminOnlyPolicy, policy => policy.RequireClaim(RolesClaimType, AdminRoleValue))
+            .AddPolicy(AdminOrSupportAgentPolicy, policy => policy.RequireClaim(RolesClaimType, AdminRoleValue, SupportAgentRoleValue));
 
         return services;
     }
